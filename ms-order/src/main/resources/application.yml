@@ -1,7 +1,6 @@
 spring:
   data:
     mongodb:
-      port: 27017
       host: localhost
-      database: order
-      uri: mongodb://root:example@localhost:27017/order
+      port: 27017
+      database: ms-order
