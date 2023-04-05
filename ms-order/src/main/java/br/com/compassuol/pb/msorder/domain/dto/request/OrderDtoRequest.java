@@ -16,5 +16,4 @@ public class OrderDtoRequest {
     private Double amount;
     private String orderStatus;
     private String paymentStatus;
-    private Integer idPayment;
 }

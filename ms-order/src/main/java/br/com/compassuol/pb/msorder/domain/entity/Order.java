@@ -1,9 +1,12 @@
 package br.com.compassuol.pb.msorder.domain.entity;
 
+import br.com.compassuol.pb.msorder.domain.enums.OrderStatus;
+import br.com.compassuol.pb.msorder.domain.enums.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -11,18 +14,19 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "order")
 @Getter @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Order {
     @Id
-    private Integer id;
+    private ObjectId id;
     @Field("cpf")
     private String cpf;
     private Items items;
     private Double amount;
-    private String orderStatus;
-    private String paymentStatus;
-    private Integer idPayment;
+    // Colocar uma anotação que faz o mesmo que o @Enumerated do JPA
+    private OrderStatus orderStatus;
+    // Colocar uma anotação que faz o mesmo que o @Enumerated do JPA
+    private PaymentStatus paymentStatus;
 
 }
 
