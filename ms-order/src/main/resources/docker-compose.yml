@@ -10,7 +10,11 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_USERNAME: root
+      MONGO_PASSWORD: example
+      MONGO_INITDB_DATABASE: ms-order
+    networks:
+      - my-network
 
-  
-      
-    
+networks:
+  my-network:
