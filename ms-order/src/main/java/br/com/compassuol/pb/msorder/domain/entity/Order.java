@@ -10,6 +10,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import java.util.List;
 
 
 @Document(collection = "order")
@@ -21,11 +23,11 @@ public class Order {
     private ObjectId id;
     @Field("cpf")
     private String cpf;
-    private Items items;
+    private List<Items> items;
     private Double amount;
-    // Colocar uma anotação que faz o mesmo que o @Enumerated do JPA
+    @Field(targetType = FieldType.STRING)
     private OrderStatus orderStatus;
-    // Colocar uma anotação que faz o mesmo que o @Enumerated do JPA
+    @Field(targetType = FieldType.STRING)
     private PaymentStatus paymentStatus;
 
 }
