@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemsController {
     @Autowired
     private ItemsService itemsService;
-    @PostMapping("/items")
+    @PostMapping("/api/item")
     public ResponseEntity<ItemsDtoResponse> save(@RequestBody ItemsDtoRequest request){
         ItemsDtoResponse itemsDtoResponse = itemsService.save(request);
         return  ResponseEntity.ok(itemsDtoResponse);
