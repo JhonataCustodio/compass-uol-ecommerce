@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
 
+import java.util.List;
+
 
 @Getter @Setter
 @NoArgsConstructor
@@ -14,7 +16,7 @@ import org.bson.types.ObjectId;
 public class OrderDtoResponse {
     private ObjectId id;
     private String cpf;
-    private Items items;
+    private List<Items> items;
     private Double amount;
     private String orderStatus;
     private String paymentStatus;
