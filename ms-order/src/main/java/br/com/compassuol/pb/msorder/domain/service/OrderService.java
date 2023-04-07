@@ -44,13 +44,9 @@ public class OrderService {
     }
     public List<OrderDtoResponse> getAll(){
         List<Order> orders = orderRepository.findAll();
-        return orders.stream().map(
-                this::convertOrderToDto
-        ).collect(Collectors.toList());
-    }
-    public OrderDtoResponse convertOrderToDto(Order order){
-        OrderDtoResponse orderDtoResponse = modelMapper.map(order, OrderDtoResponse.class);
-        return orderDtoResponse;
+        List<OrderDtoResponse> orderDtoResponses = orders.stream()
+                .map(order -> modelMapper.map(order, OrderDtoResponse.class)).collect(Collectors.toList());
+        return orderDtoResponses;
     }
     public List<OrderDtoResponse> getByCpf(String cpf){
         List<Order> orders = orderRepository.searchByCpf(cpf);
