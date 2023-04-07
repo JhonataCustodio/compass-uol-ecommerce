@@ -3,6 +3,7 @@ package br.com.compassuol.pb.msorder.controller;
 import br.com.compassuol.pb.msorder.domain.dto.request.OrderDtoRequest;
 import br.com.compassuol.pb.msorder.domain.dto.response.OrderDtoResponse;
 import br.com.compassuol.pb.msorder.domain.service.OrderService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,10 @@ public class OrderController {
     public ResponseEntity<List<OrderDtoResponse>> getByAmount(){
         List<OrderDtoResponse> orderDtoResponses = orderService.getByAmount();
         return ResponseEntity.ok(orderDtoResponses);
+    }
+    @GetMapping("/api/order/id/{id}")
+    public ResponseEntity<OrderDtoResponse> getById(@PathVariable ObjectId id){
+        OrderDtoResponse orderDtoResponse = orderService.getById(id);
+        return ResponseEntity.ok(orderDtoResponse);
     }
 }

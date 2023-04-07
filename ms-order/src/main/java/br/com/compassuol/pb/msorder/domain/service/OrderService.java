@@ -8,6 +8,7 @@ import br.com.compassuol.pb.msorder.domain.enums.OrderStatus;
 import br.com.compassuol.pb.msorder.domain.enums.PaymentStatus;
 import br.com.compassuol.pb.msorder.domain.repository.ItemsRepository;
 import br.com.compassuol.pb.msorder.domain.repository.OrderRepository;
+import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +60,10 @@ public class OrderService {
         List<OrderDtoResponse> orderDtoResponses = orders.stream()
                 .map(order -> modelMapper.map(order, OrderDtoResponse.class)).collect(Collectors.toList());
         return orderDtoResponses;
+    }
+    public OrderDtoResponse getById(ObjectId id){
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Id not found"));
+        return modelMapper.map(order, OrderDtoResponse.class);
     }
 }
