@@ -52,4 +52,10 @@ public class OrderService {
         OrderDtoResponse orderDtoResponse = modelMapper.map(order, OrderDtoResponse.class);
         return orderDtoResponse;
     }
+    public List<OrderDtoResponse> getByCpf(String cpf){
+        List<Order> orders = orderRepository.searchByCpf(cpf);
+        List<OrderDtoResponse> orderDtoResponses = orders.stream()
+                .map(order -> modelMapper.map(order, OrderDtoResponse.class)).collect(Collectors.toList());
+        return orderDtoResponses;
+    }
 }
