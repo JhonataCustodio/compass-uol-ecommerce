@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -38,6 +39,16 @@ public class OrderService {
         order.setOrderStatus(OrderStatus.valueOf(request.getOrderStatus()));
         order.setPaymentStatus(PaymentStatus.valueOf(request.getPaymentStatus()));
         orderRepository.save(order);
+        OrderDtoResponse orderDtoResponse = modelMapper.map(order, OrderDtoResponse.class);
+        return orderDtoResponse;
+    }
+    public List<OrderDtoResponse> getAll(){
+        List<Order> orders = orderRepository.findAll();
+        return orders.stream().map(
+                this::convertOrderToDto
+        ).collect(Collectors.toList());
+    }
+    public OrderDtoResponse convertOrderToDto(Order order){
         OrderDtoResponse orderDtoResponse = modelMapper.map(order, OrderDtoResponse.class);
         return orderDtoResponse;
     }
