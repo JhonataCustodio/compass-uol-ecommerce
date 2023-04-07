@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface OrderRepository extends MongoRepository<Order, ObjectId> {
     List<Order> searchByCpf(String cpf);
+    List<Order> findAllByOrderByAmountAsc();
 }
