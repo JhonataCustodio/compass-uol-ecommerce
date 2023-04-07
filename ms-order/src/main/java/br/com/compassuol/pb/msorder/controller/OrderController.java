@@ -44,4 +44,9 @@ public class OrderController {
         OrderDtoResponse orderDtoResponse = orderService.delete(id);
         return ResponseEntity.ok(orderDtoResponse);
     }
+    @PutMapping("/api/order/{id}")
+    public ResponseEntity<OrderDtoResponse> update(@PathVariable ObjectId id, @RequestBody OrderDtoRequest request){
+        OrderDtoResponse orderDtoResponse = orderService.update(id, request);
+        return ResponseEntity.ok(orderDtoResponse);
+    }
 }

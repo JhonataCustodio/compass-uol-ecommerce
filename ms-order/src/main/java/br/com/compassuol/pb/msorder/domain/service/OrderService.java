@@ -72,4 +72,14 @@ public class OrderService {
         orderRepository.delete(order);
         return modelMapper.map(order, OrderDtoResponse.class);
     }
+    public OrderDtoResponse update(ObjectId id, OrderDtoRequest request){
+        Order order = orderRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Id not found"));
+        order.setCpf(request.getCpf());
+        order.setAmount(request.getAmount());
+        order.setOrderStatus(OrderStatus.valueOf(request.getOrderStatus()));
+        order.setPaymentStatus(PaymentStatus.valueOf(request.getPaymentStatus()));
+        orderRepository.save(order);
+        return modelMapper.map(order, OrderDtoResponse.class);
+    }
 }
