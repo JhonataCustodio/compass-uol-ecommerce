@@ -39,4 +39,9 @@ public class OrderController {
         OrderDtoResponse orderDtoResponse = orderService.getById(id);
         return ResponseEntity.ok(orderDtoResponse);
     }
+    @DeleteMapping("/api/order/{id}")
+    public ResponseEntity<OrderDtoResponse> delete(@PathVariable ObjectId id){
+        OrderDtoResponse orderDtoResponse = orderService.delete(id);
+        return ResponseEntity.ok(orderDtoResponse);
+    }
 }

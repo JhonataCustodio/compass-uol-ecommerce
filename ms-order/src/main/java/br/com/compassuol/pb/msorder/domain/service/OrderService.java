@@ -66,4 +66,10 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("Id not found"));
         return modelMapper.map(order, OrderDtoResponse.class);
     }
+    public OrderDtoResponse delete(ObjectId id){
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Id not found"));
+        orderRepository.delete(order);
+        return modelMapper.map(order, OrderDtoResponse.class);
+    }
 }
