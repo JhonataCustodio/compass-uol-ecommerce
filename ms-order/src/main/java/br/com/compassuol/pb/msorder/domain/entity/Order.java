@@ -13,6 +13,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
@@ -24,16 +26,17 @@ public class Order {
     @Id
     private ObjectId id;
     @Field("cpf")
-    @NotBlank
+    @NotEmpty
     private String cpf;
     private List<Items> items;
-    @NotBlank
+    @NotEmpty
+    @NotNull
     private Double amount;
     @Field(targetType = FieldType.STRING)
-    @NotBlank
+    @NotEmpty
     private OrderStatus orderStatus;
     @Field(targetType = FieldType.STRING)
-    @NotBlank
+    @NotEmpty
     private PaymentStatus paymentStatus;
 
 }
