@@ -11,6 +11,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
+
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 
@@ -22,12 +24,16 @@ public class Order {
     @Id
     private ObjectId id;
     @Field("cpf")
+    @NotBlank
     private String cpf;
     private List<Items> items;
+    @NotBlank
     private Double amount;
     @Field(targetType = FieldType.STRING)
+    @NotBlank
     private OrderStatus orderStatus;
     @Field(targetType = FieldType.STRING)
+    @NotBlank
     private PaymentStatus paymentStatus;
 
 }
