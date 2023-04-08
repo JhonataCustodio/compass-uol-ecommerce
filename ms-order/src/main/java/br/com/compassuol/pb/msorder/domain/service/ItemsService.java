@@ -4,6 +4,7 @@ import br.com.compassuol.pb.msorder.domain.dto.request.ItemsDtoRequest;
 import br.com.compassuol.pb.msorder.domain.dto.response.ItemsDtoResponse;
 import br.com.compassuol.pb.msorder.domain.entity.Items;
 import br.com.compassuol.pb.msorder.domain.entity.Order;
+import br.com.compassuol.pb.msorder.domain.exception.MessageExceptionNotFound;
 import br.com.compassuol.pb.msorder.domain.repository.ItemsRepository;
 import br.com.compassuol.pb.msorder.domain.repository.OrderRepository;
 import org.bson.types.ObjectId;
@@ -27,11 +28,11 @@ public class ItemsService {
     }
     public ItemsDtoResponse update(ObjectId idOrder, ObjectId idItem , ItemsDtoRequest request){
         Order order = orderRepository.findById(idOrder)
-                .orElseThrow(()-> new RuntimeException("Order id not found"));
+                .orElseThrow(()-> new MessageExceptionNotFound("Order id not found"));
         Items items = order.getItems().stream()
                 .filter(i -> i.getId().equals(idItem))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Item not found in order"));
+                .orElseThrow(() -> new MessageExceptionNotFound("Item not found in order"));
         items.setName(request.getName());
         items.setDescription(request.getDescription());
         items.setCreationDate(request.getCreationDate());

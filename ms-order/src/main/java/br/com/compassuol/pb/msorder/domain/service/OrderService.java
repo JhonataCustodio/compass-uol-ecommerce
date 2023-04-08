@@ -6,6 +6,7 @@ import br.com.compassuol.pb.msorder.domain.entity.Items;
 import br.com.compassuol.pb.msorder.domain.entity.Order;
 import br.com.compassuol.pb.msorder.domain.enums.OrderStatus;
 import br.com.compassuol.pb.msorder.domain.enums.PaymentStatus;
+import br.com.compassuol.pb.msorder.domain.exception.MessageExceptionNotFound;
 import br.com.compassuol.pb.msorder.domain.repository.ItemsRepository;
 import br.com.compassuol.pb.msorder.domain.repository.OrderRepository;
 import org.bson.types.ObjectId;
@@ -42,9 +43,11 @@ public class OrderService {
         orderRepository.save(order);
 
         if(!EnumSet.allOf(OrderStatus.class).contains(order.getOrderStatus())){
-            throw new RuntimeException("Error fild orderStatus");
+            //Exception MessageExceptionNotFound com problemas
+            throw new MessageExceptionNotFound("Error fild orderStatus");
         }else if(!EnumSet.allOf(PaymentStatus.class).contains(order.getPaymentStatus())){
-            throw new RuntimeException("Error fild paymentStatus");
+            //Exception MessageExceptionNotFound com problemas
+            throw new MessageExceptionNotFound("Error fild paymentStatus");
         }else {
             OrderDtoResponse orderDtoResponse = modelMapper.map(order, OrderDtoResponse.class);
             return orderDtoResponse;
@@ -70,18 +73,18 @@ public class OrderService {
     }
     public OrderDtoResponse getById(ObjectId id){
         Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Id not found"));
+                .orElseThrow(() -> new MessageExceptionNotFound("Order id not found"));
         return modelMapper.map(order, OrderDtoResponse.class);
     }
     public OrderDtoResponse delete(ObjectId id){
         Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Id not found"));
+                .orElseThrow(() -> new MessageExceptionNotFound("Order id not found"));
         orderRepository.delete(order);
         return modelMapper.map(order, OrderDtoResponse.class);
     }
     public OrderDtoResponse update(ObjectId id, OrderDtoRequest request){
         Order order = orderRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Id not found"));
+                .orElseThrow(()-> new MessageExceptionNotFound("Order id not found"));
         order.setCpf(request.getCpf());
         order.setAmount(request.getAmount());
         order.setOrderStatus(OrderStatus.valueOf(request.getOrderStatus()));

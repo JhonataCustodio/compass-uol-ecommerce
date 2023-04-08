@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @PostMapping("/order")
-    public ResponseEntity<OrderDtoResponse> save(@RequestBody OrderDtoRequest request){
+    public ResponseEntity<OrderDtoResponse> save(@Valid @RequestBody OrderDtoRequest request){
         OrderDtoResponse orderDtoResponse = orderService.save(request);
         return ResponseEntity.ok(orderDtoResponse);
     }
@@ -45,7 +46,7 @@ public class OrderController {
         return ResponseEntity.ok(orderDtoResponse);
     }
     @PutMapping("/api/order/{id}")
-    public ResponseEntity<OrderDtoResponse> update(@PathVariable ObjectId id, @RequestBody OrderDtoRequest request){
+    public ResponseEntity<OrderDtoResponse> update(@Valid @PathVariable ObjectId id, @RequestBody OrderDtoRequest request){
         OrderDtoResponse orderDtoResponse = orderService.update(id, request);
         return ResponseEntity.ok(orderDtoResponse);
     }
