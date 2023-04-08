@@ -12,10 +12,9 @@ import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +25,7 @@ public class OrderService {
     private OrderRepository orderRepository;
     @Autowired
     private ItemsRepository itemsRepository;
+    @Transactional
     public OrderDtoResponse save(OrderDtoRequest request){
         Optional<Items> items = itemsRepository.findById(request.getItems().getId());
         if(items.isEmpty()){
@@ -37,11 +37,18 @@ public class OrderService {
         order.setCpf(request.getCpf());
         order.setItems(itemsList);
         order.setAmount(request.getAmount());
-        order.setOrderStatus(OrderStatus.valueOf(request.getOrderStatus()));
-        order.setPaymentStatus(PaymentStatus.valueOf(request.getPaymentStatus()));
+        order.setOrderStatus(OrderStatus.valueOf(request.getOrderStatus().toUpperCase()));
+        order.setPaymentStatus(PaymentStatus.valueOf(request.getPaymentStatus().toUpperCase()));
         orderRepository.save(order);
-        OrderDtoResponse orderDtoResponse = modelMapper.map(order, OrderDtoResponse.class);
-        return orderDtoResponse;
+
+        if(!EnumSet.allOf(OrderStatus.class).contains(order.getOrderStatus())){
+            throw new RuntimeException("Error fild orderStatus");
+        }else if(!EnumSet.allOf(PaymentStatus.class).contains(order.getPaymentStatus())){
+            throw new RuntimeException("Error fild paymentStatus");
+        }else {
+            OrderDtoResponse orderDtoResponse = modelMapper.map(order, OrderDtoResponse.class);
+            return orderDtoResponse;
+        }
     }
     public List<OrderDtoResponse> getAll(){
         List<Order> orders = orderRepository.findAll();
