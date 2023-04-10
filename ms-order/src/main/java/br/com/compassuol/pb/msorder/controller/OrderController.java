@@ -21,7 +21,7 @@ public class OrderController {
     @PostMapping("/order")
     public ResponseEntity<OrderDtoResponse> save(@Valid @RequestBody OrderDtoRequest request){
         OrderDtoResponse orderDtoResponse = orderService.save(request);
-        rabbitTemplate.convertAndSend("order-exchange", "order-create", request);
+        rabbitTemplate.convertAndSend("payment", request);
         return ResponseEntity.ok(orderDtoResponse);
     }
     @GetMapping("/api/order")
