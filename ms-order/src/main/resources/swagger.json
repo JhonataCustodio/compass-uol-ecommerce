@@ -1,0 +1,997 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger Compass UOL Ecommerce Order  API - OpenAPI 3.0",
+    "description": "API representation of order microservice",
+    "contact": {
+      "url": "https://compass.uol/"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "localhost:8080"
+    }
+  ],
+  "paths": {
+    "/api/order": {
+      "get": {
+        "summary": "Returns a list of Order objects",
+        "description": "Returns an array of Order objects.",
+        "responses": {
+          "200": {
+            "description": "Success in returning order list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "integer",
+                            "description": "Timestamp do ID."
+                          },
+                          "date": {
+                            "type": "string",
+                            "description": "Date do ID."
+                          }
+                        },
+                        "description": "ID order."
+                      },
+                      "cpf": {
+                        "type": "string",
+                        "description": "Customer's CPF."
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "object",
+                              "properties": {
+                                "timestamp": {
+                                  "type": "integer",
+                                  "description": "Timestamp ID items."
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "description": "Date ID items."
+                                }
+                              },
+                              "description": "ID item."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "Name item."
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Description item."
+                            },
+                            "creationDate": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "Item creation date."
+                            },
+                            "expirationDate": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "Item expiration date."
+                            },
+                            "amount": {
+                              "type": "number",
+                              "format": "float",
+                              "description": "item value."
+                            }
+                          },
+                          "description": "The order item."
+                        },
+                        "description": "Order item list."
+                      },
+                      "amount": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Total order value."
+                      },
+                      "orderStatus": {
+                        "type": "string",
+                        "description": "Current order status."
+                      },
+                      "paymentStatus": {
+                        "type": "string",
+                        "description": "Current payment status."
+                      }
+                    }
+                  },
+                  "description": "Object Order."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/order/{cpf}": {
+      "get": {
+        "summary": "Returns a specific Order object based on the provided CPF.",
+        "description": "Returns an Order object based on the provided CPF.",
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "description": "The client's CPF.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success returning the Order object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer",
+                          "description": "The ID timestamp."
+                        },
+                        "date": {
+                          "type": "string",
+                          "description": "The ID date."
+                        }
+                      },
+                      "description": "The order ID."
+                    },
+                    "cpf": {
+                      "type": "string",
+                      "description": "The client's CPF."
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "object",
+                            "properties": {
+                              "timestamp": {
+                                "type": "integer",
+                                "description": "The item ID timestamp."
+                              },
+                              "date": {
+                                "type": "string",
+                                "description": "The item ID date."
+                              }
+                            },
+                            "description": "The item ID."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The item name."
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The item description."
+                          },
+                          "creationDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The item creation date."
+                          },
+                          "expirationDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The item expiration date."
+                          },
+                          "amount": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "The item amount."
+                          }
+                        },
+                        "description": "The order item."
+                      },
+                      "description": "The order's item list."
+                    },
+                    "amount": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "The order's total amount."
+                    },
+                    "orderStatus": {
+                      "type": "string",
+                      "description": "The current order status."
+                    },
+                    "paymentStatus": {
+                      "type": "string",
+                      "description": "The current payment status."
+                    }
+                  },
+                  "description": "The Order object."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "CPF not found."
+          }
+        },
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/order/amount": {
+      "get": {
+        "summary": "Returns the values in order.",
+        "description": "Returns the values in order.",
+        "responses": {
+          "200": {
+            "description": "Success returning the Order object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer",
+                          "description": "The ID timestamp."
+                        },
+                        "date": {
+                          "type": "string",
+                          "description": "The ID date."
+                        }
+                      },
+                      "description": "The order ID."
+                    },
+                    "cpf": {
+                      "type": "string",
+                      "description": "The client's CPF."
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "object",
+                            "properties": {
+                              "timestamp": {
+                                "type": "integer",
+                                "description": "The item ID timestamp."
+                              },
+                              "date": {
+                                "type": "string",
+                                "description": "The item ID date."
+                              }
+                            },
+                            "description": "The item ID."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The item name."
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The item description."
+                          },
+                          "creationDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The item creation date."
+                          },
+                          "expirationDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The item expiration date."
+                          },
+                          "amount": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "The item amount."
+                          }
+                        },
+                        "description": "The order item."
+                      },
+                      "description": "The order's item list."
+                    },
+                    "amount": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "The order's total amount."
+                    },
+                    "orderStatus": {
+                      "type": "string",
+                      "description": "The current order status."
+                    },
+                    "paymentStatus": {
+                      "type": "string",
+                      "description": "The current payment status."
+                    }
+                  },
+                  "description": "The Order object."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/order/id/{id}": {
+      "get": {
+        "summary": "Returns a specific Order object based on the provided ID.",
+        "description": "Returns an Order object based on the provided ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The client's ID.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success returning the Order object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer",
+                          "description": "The ID timestamp."
+                        },
+                        "date": {
+                          "type": "string",
+                          "description": "The ID date."
+                        }
+                      },
+                      "description": "The order ID."
+                    },
+                    "cpf": {
+                      "type": "string",
+                      "description": "The client's CPF."
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "object",
+                            "properties": {
+                              "timestamp": {
+                                "type": "integer",
+                                "description": "The item ID timestamp."
+                              },
+                              "date": {
+                                "type": "string",
+                                "description": "The item ID date."
+                              }
+                            },
+                            "description": "The item ID."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The item name."
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The item description."
+                          },
+                          "creationDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The item creation date."
+                          },
+                          "expirationDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The item expiration date."
+                          },
+                          "amount": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "The item amount."
+                          }
+                        },
+                        "description": "The order item."
+                      },
+                      "description": "The order's item list."
+                    },
+                    "amount": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "The order's total amount."
+                    },
+                    "orderStatus": {
+                      "type": "string",
+                      "description": "The current order status."
+                    },
+                    "paymentStatus": {
+                      "type": "string",
+                      "description": "The current payment status."
+                    }
+                  },
+                  "description": "The Order object."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ID not found."
+          }
+        },
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/order/": {
+      "post": {
+        "summary": "Creates a new Order object.",
+        "description": "Creates a new Order object with the provided data.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": {
+                    "type": "string",
+                    "description": "The client's CPF."
+                  },
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "The item ID."
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "description": "The item to be added to the order."
+                  },
+                  "amount": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "The order's total amount."
+                  },
+                  "orderStatus": {
+                    "type": "string",
+                    "description": "The current order status."
+                  },
+                  "paymentStatus": {
+                    "type": "string",
+                    "description": "The current payment status."
+                  }
+                },
+                "required": [
+                  "cpf",
+                  "items",
+                  "amount",
+                  "orderStatus",
+                  "paymentStatus"
+                ]
+              },
+              "example": {
+                "cpf": "12345678910",
+                "items": {
+                  "id": "642e8a22f6080430871c44ce"
+                },
+                "amount": 57.8,
+                "orderStatus": "finished",
+                "paymentStatus": "approved"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order object created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer",
+                          "description": "The ID timestamp."
+                        },
+                        "date": {
+                          "type": "string",
+                          "description": "The ID date."
+                        }
+                      },
+                      "description": "The order ID."
+                    },
+                    "cpf": {
+                      "type": "string",
+                      "description": "The client's CPF."
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "object",
+                            "properties": {
+                              "timestamp": {
+                                "type": "integer",
+                                "description": "The item ID timestamp."
+                              },
+                              "date": {
+                                "type": "string",
+                                "description": "The item ID date."
+                              }
+                            },
+                            "description": "The item ID."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The item name."
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The item description."
+                          },
+                          "creationDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The item creation date."
+                          },
+                          "expirationDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The item expiration date."
+                          },
+                          "amount": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "The item amount."
+                          }
+                        },
+                        "description": "The order item."
+                      },
+                      "description": "The order's item list."
+                    },
+                    "amount": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "The order's total amount."
+                    },
+                    "orderStatus": {
+                      "type": "string",
+                      "description": "The current order status."
+                    },
+                    "paymentStatus": {
+                      "type": "string",
+                      "description": "The current payment status."
+                    }
+                  },
+                  "description": "The Order object."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body."
+          }
+        },
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/items": {
+      "put": {
+        "summary": "Update a item",
+        "description": "Method that update a item.",
+        "operationId": "putItem",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The item name."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The item description."
+                  },
+                  "creationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The item creation date."
+                  },
+                  "expirationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The item expiration date."
+                  },
+                  "amount": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "The item amount."
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "creationDate",
+                  "expirationDate",
+                  "amount"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success return id item.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The ID of the created item."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the created item."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "The description of the created item."
+                    },
+                    "creationDate": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "The creation date of the created item."
+                    },
+                    "expirationDate": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "The expiration date of the created item."
+                    },
+                    "amount": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "The amount of the created item."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/items/": {
+      "post": {
+        "summary": "post a item",
+        "description": "Method that create a item.",
+        "operationId": "postItem",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The item name."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The item description."
+                  },
+                  "creationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The item creation date."
+                  },
+                  "expirationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The item expiration date."
+                  },
+                  "amount": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "The item amount."
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "creationDate",
+                  "expirationDate",
+                  "amount"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success return id item.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The ID of the created item."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the created item."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "The description of the created item."
+                    },
+                    "creationDate": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "The creation date of the created item."
+                    },
+                    "expirationDate": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "The expiration date of the created item."
+                    },
+                    "amount": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "The amount of the created item."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Order"
+        ]
+      }
+    },
+    "/api/order/{orderId}": {
+      "delete": {
+        "summary": "Delete a Order by ID",
+        "description": "Deletes a single Order object identified by its ID.",
+        "operationId": "deleteOrderById",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "ID of the Order to be deleted.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Order was deleted successfully."
+          },
+          "404": {
+            "description": "The Order was not found."
+          }
+        },
+        "tags": [
+          "Order"
+        ]
+      },
+      "/api/order/{orderId}": null,
+      "put": {
+        "summary": "Update an order",
+        "description": "Method to update an existing order with the given data",
+        "operationId": "updateOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "The ID of the order to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": {
+                    "type": "string",
+                    "description": "The customer's CPF"
+                  },
+                  "amount": {
+                    "type": "string",
+                    "description": "The order amount"
+                  },
+                  "orderStatus": {
+                    "type": "string",
+                    "enum": [
+                      "IN_PROGRESS",
+                      "COMPLETED",
+                      "CANCELED"
+                    ],
+                    "description": "The current order status"
+                  },
+                  "paymentStatus": {
+                    "type": "string",
+                    "enum": [
+                      "PROCESSING",
+                      "APPROVED",
+                      "DECLINED"
+                    ],
+                    "description": "The current payment status"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success, order updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A message confirming the order was updated"
+                    },
+                    "order": {
+                      "type": "object",
+                      "description": "The updated order object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the order"
+                        },
+                        "cpf": {
+                          "type": "string",
+                          "description": "The customer's CPF"
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "object",
+                                "properties": {
+                                  "timestamp": {
+                                    "type": "integer",
+                                    "description": "The timestamp of the item creation"
+                                  },
+                                  "date": {
+                                    "type": "string",
+                                    "description": "The date of the item creation"
+                                  },
+                                  "description": "The item ID"
+                                }
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "The name of the item"
+                              },
+                              "description": {
+                                "type": "string",
+                                "description": "The description of the item"
+                              },
+                              "creationDate": {
+                                "type": "string",
+                                "description": "The creation date of the item"
+                              },
+                              "expirationDate": {
+                                "type": "string",
+                                "description": "The expiration date of the item"
+                              },
+                              "amount": {
+                                "type": "number",
+                                "description": "The amount of the item"
+                              }
+                            }
+                          }
+                        },
+                        "amount": {
+                          "type": "number",
+                          "description": "The total amount of the order"
+                        },
+                        "orderStatus": {
+                          "type": "string",
+                          "enum": [
+                            "IN_PROGRESS",
+                            "COMPLETED",
+                            "CANCELED"
+                          ],
+                          "description": "The current order status"
+                        },
+                        "paymentStatus": {
+                          "type": "string",
+                          "enum": [
+                            "PROCESSING",
+                            "APPROVED",
+                            "DECLINED"
+                          ],
+                          "description": "The current payment status"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Order"
+        ]
+      }
+    }
+  }
+}

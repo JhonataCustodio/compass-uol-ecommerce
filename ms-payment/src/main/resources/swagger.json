@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger Compass UOL Ecommerce Payment  API - OpenAPI 3.0",
+    "description": "API representation of payment microservice",
+    "contact": {
+      "url": "https://compass.uol/"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "localhost:8081"
+    }
+  ],
+  "paths": {
+    "/payment": {
+      "get": {
+        "summary": "Get Payment information by orderId",
+        "description": "Returns a Payment object by orderId.",
+        "operationId": "getPaymentByOrderId",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "orderId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The ID of the payment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success return payment information.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "orderId": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "The timestamp of the payment ID."
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The date of the payment ID."
+                        }
+                      },
+                      "description": "The Payment ID."
+                    },
+                    "totalOrder": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "The total amount of the payment."
+                    },
+                    "paymentStatus": {
+                      "type": "string",
+                      "description": "The payment status of the payment."
+                    }
+                  },
+                  "required": [
+                    "orderId",
+                    "totalOrder",
+                    "paymentStatus"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "tags": [
+          "Payment"
+        ]
+      }
+    }
+  }
+}
