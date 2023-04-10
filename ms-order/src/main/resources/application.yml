@@ -1,0 +1,15 @@
+spring:
+  messages:
+    basename: messages
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017/ms-order
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+mq:
+  queues:
+    payment: payment

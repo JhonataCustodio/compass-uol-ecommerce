@@ -7,15 +7,27 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ms-order" />
+<<<<<<< HEAD
+=======
+        <module name="ms-payment" />
+>>>>>>> development
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ms-order" target="17" />
+<<<<<<< HEAD
+=======
+      <module name="ms-payment" target="17" />
+>>>>>>> development
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ms-order" options="-parameters" />
+<<<<<<< HEAD
+=======
+      <module name="ms-payment" options="-parameters" />
+>>>>>>> development
     </option>
   </component>
 </project>
