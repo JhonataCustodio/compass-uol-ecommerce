@@ -46,7 +46,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/api/order/id",
+					"name": "http://api/order/{idOrder}/item/{idItem}",
 					"request": {
 						"method": "PUT",
 						"header": [],
